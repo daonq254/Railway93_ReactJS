@@ -85,3 +85,6 @@ CallAPIcheckEmail()
   .catch(function (err) {
     console.log(err);
   });
+
+// let myname: String = "daonq";
+// myname.trim()
