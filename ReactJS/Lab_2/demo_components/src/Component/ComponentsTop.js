@@ -13,6 +13,8 @@ class ComponentsTop extends Component {
     //   // stateA: 1,
     //   // stateb: 2,
     // };
+
+    this.state = { data: "" };
   }
 
   // Hàm xử lý sự kiện khi nhấn nút Sent Data
@@ -22,12 +24,22 @@ class ComponentsTop extends Component {
     // this.setState({
     //   click_number: this.state.click_number + 1,
     // });
+    console.log(`State Data: ${this.state.data}`);
+
     let dataFromTopToApp = "dataFromTopToApp";
     // let student = {
     //   id: 1,
     //   name: "daonq",
     // };
     this.props.onHandleSentData(dataFromTopToApp);
+  };
+  // Khai báo hàm handleChange
+  handleChange = (event) => {
+    // console.log(event);
+
+    this.setState({
+      data: event.target.value,
+    });
   };
 
   // Dùng để hiển thị giao diện
@@ -51,7 +63,7 @@ class ComponentsTop extends Component {
               <div className="panel-body">
                 <div className="row">
                   <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" value={this.state.data} onChange={this.handleChange} />
                   </div>
                   <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <button type="button" className="btn btn-danger" onClick={this.hanldeSentData}>
