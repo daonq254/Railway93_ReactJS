@@ -1,10 +1,15 @@
 import React from "react";
 import { Button } from "reactstrap";
 
-function CreateButton(props) {
+function CreateButton({ onHandleCreateNewAccount }) {
+  let handleCreateNewAccount = () => {
+    onHandleCreateNewAccount();
+  };
   return (
     <>
-      <Button color="primary">Danger!</Button>
+      <Button color="primary" onClick={handleCreateNewAccount}>
+        Create New Account
+      </Button>
     </>
   );
 }

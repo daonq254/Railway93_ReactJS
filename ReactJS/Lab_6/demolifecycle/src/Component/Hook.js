@@ -4,7 +4,7 @@ function Hook(props) {
   // Khai báo State Lưu trữ số lần nhấn vào nút click1
   let [count1, setCount1] = useState(0); // count1 = 0
   let [count2, setCount2] = useState(0); // count2 = 0
-
+  let [count3, setCount3] = useState(0); // count2 = 0
   // setCount1(giá trị mới)  ==> count1= giá trị mới
   // Khai báo useEffect()
   useEffect(() => {
@@ -13,9 +13,16 @@ function Hook(props) {
   //
   useEffect(() => {
     console.log("Code 2");
-  }, [count2]);
+  }, [count2, count3, count1]);
   //
-
+  useEffect(() => {
+    //
+    //
+    return () => {
+      console.log("Final Code !!");
+    };
+  });
+  //
   return (
     <>
       <div className="container">
