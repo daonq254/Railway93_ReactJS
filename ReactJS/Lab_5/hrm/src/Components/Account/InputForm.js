@@ -18,13 +18,21 @@ function InputForm({ onHandleCreateAccount, listDepartment, listPosition }) {
 
     // AccountNew
     let accountNew = {
-      id: 1,
+      // id: 1,
       email: Email,
       username: Username,
       fullname: Fullname,
-      department: Department,
-      position: Postion,
-      createDate: "10-09-2025",
+      departmentId: Department,
+      positionId: Postion,
+      // createDate: "10-09-2025",
+
+      //   {
+      //     "email": "Test2@viettel.com",
+      //     "username": "Test2",
+      //     "fullname": "Test2",
+      //     "departmentId": "4",
+      //     "positionId": "3"
+      // }
     };
 
     onHandleCreateAccount(accountNew);

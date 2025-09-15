@@ -3,6 +3,9 @@ import CreateButton from "../Components/Account/CreateButton";
 import ResultForm from "../Components/Account/ResultForm";
 import ModalCreateNewAccount from "../Components/Account/ModalCreateNewAccount";
 import Axios from "axios";
+import { createNewAccountAPI, getListAccountAPI } from "../API/AccountApi";
+import { getListDepartmentAPI } from "../API/DepartmentAPI";
+import { getListPositionAPI } from "../API/PositionAPI";
 
 function AccountContainer(props) {
   let [showForm, setShowForm] = useState(false);
@@ -30,38 +33,56 @@ function AccountContainer(props) {
     //
     // console.log(`accountNew: ${accountNew.id}`);
     // listAccount.push(accountNew);
-    listAccount.push(accountNew);
-    setListAccount(listAccount);
+    // listAccount.push(accountNew);
+    // setListAccount(listAccount);
     // Lưu trữ vào Local Storage
-    localStorage.setItem("listAccount", JSON.stringify(listAccount));
+    // localStorage.setItem("listAccount", JSON.stringify(listAccount));
     // Đóng form thêm mới
+
+    createNewAccountAPI(accountNew).then((response) => {
+      // response: Create successfully!
+      //  {accountNew} ==> thay đổi state: listAccount+ accountNew
+
+      fetchListAccountAPI();
+      //
+    });
     setShowForm(false);
   };
   //
   let fetchListAccountAPI = () => {
-    Axios.get("http://localhost:8080/api/v1/accounts").then((response) => {
-      // console.log("response: ", response);
-      let listAccountAPI = response.data;
-      console.log("listAccountAPI: ", listAccountAPI);
-      setListAccount(listAccountAPI);
+    // Axios.get("http://localhost:8080/api/v1/accounts").then((response) => {
+    //   // console.log("response: ", response);
+    //   let listAccountAPI = response.data;
+    //   console.log("listAccountAPI: ", listAccountAPI);
+    //   setListAccount(listAccountAPI);
+    // });
+    getListAccountAPI().then((response) => {
+      setListAccount(response);
     });
   };
 
   //
   let fetchListDepartmentAPI = () => {
-    Axios.get("http://localhost:8080/api/v1/departments").then((response) => {
-      // console.log("response: ", response);
-      let listDepartmentAPI = response.data;
-      setListDepartment(listDepartmentAPI);
+    // Axios.get("http://localhost:8080/api/v1/departments").then((response) => {
+    //   // console.log("response: ", response);
+    //   let listDepartmentAPI = response.data;
+    //   setListDepartment(listDepartmentAPI);
+    // });
+
+    getListDepartmentAPI().then((response) => {
+      setListDepartment(response);
     });
   };
   //
   //
   let fetchListPositionAPI = () => {
-    Axios.get("http://localhost:8080/api/v1/possitions").then((response) => {
-      // console.log("response: ", response);
-      let listPositionAPI = response.data;
-      setListPosition(listPositionAPI);
+    // Axios.get("http://localhost:8080/api/v1/possitions").then((response) => {
+    //   // console.log("response: ", response);
+    //   let listPositionAPI = response.data;
+    //   setListPosition(listPositionAPI);
+    // });
+    getListPositionAPI().then((response) => {
+      setListPosition(response);
     });
   };
   useEffect(() => {
@@ -78,7 +99,7 @@ function AccountContainer(props) {
     fetchListAccountAPI();
     fetchListDepartmentAPI();
     fetchListPositionAPI();
-  });
+  }, []);
   //
   return (
     <>
