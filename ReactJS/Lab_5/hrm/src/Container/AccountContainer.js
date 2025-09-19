@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import CreateButton from "../Components/Account/CreateButton";
 import ResultForm from "../Components/Account/ResultForm";
 import ModalCreateNewAccount from "../Components/Account/ModalCreateNewAccount";
-import Axios from "axios";
 import { createNewAccountAPI, getListAccountAPI } from "../API/AccountApi";
 import { getListDepartmentAPI } from "../API/DepartmentAPI";
 import { getListPositionAPI } from "../API/PositionAPI";
+import { useDispatch } from "react-redux";
+import { actionCloseInpuForm, actionShowInpuForm } from "../Redux/Action/FormAction";
 
 function AccountContainer(props) {
-  let [showForm, setShowForm] = useState(false);
+  // let [showForm, setShowForm] = useState(false);
 
   //
   let [listAccount, setListAccount] = useState([]);
@@ -17,17 +18,23 @@ function AccountContainer(props) {
 
   // Khai báo State để quản lý danh sách Account trên hệ thống
   let [listDepartment, setListDepartment] = useState([]);
-
+  //
+  let dispatchRedux = useDispatch();
   //  khai báo hàm callback xử lý khi nhấn nút CreateNewAccount
   let onHandleCreateNewAccount = () => {
     //
-    setShowForm(true);
+    // setShowForm(true);
+    // Thay đổi giá trị State showForm ở Redux từ false==> true
+    // actionShowInpuForm()
+    // dispatch
+    dispatchRedux(actionShowInpuForm());
   };
 
   //  khai báo hàm callback xử lý khi nhấn nút Close ở Modal
   let onHandleCloseModal = () => {
     //
-    setShowForm(false);
+    // setShowForm(false);
+    dispatchRedux(actionCloseInpuForm());
   };
 
   // Hàm tạo Account
@@ -48,7 +55,8 @@ function AccountContainer(props) {
       fetchListAccountAPI();
       //
     });
-    setShowForm(false);
+    // setShowForm(false);
+    dispatchRedux(actionCloseInpuForm());
   };
   //
   let fetchListAccountAPI = () => {
@@ -108,7 +116,7 @@ function AccountContainer(props) {
       <CreateButton onHandleCreateNewAccount={onHandleCreateNewAccount} />
       <ResultForm listAccount={listAccount} />
       <ModalCreateNewAccount
-        showForm={showForm}
+        // showForm={showForm}
         onHandleCloseModal={onHandleCloseModal}
         onHandleCreateAccount={onHandleCreateAccount}
         listDepartment={listDepartment}
