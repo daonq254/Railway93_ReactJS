@@ -1,7 +1,6 @@
 // import { createStore } from "redux";
 import { actionCloseInpuForm, actionShowInpuForm } from "./Actions/FormAction";
 import { actionCreateNewAccount } from "./Actions/AccountAction";
-import { RootReducer } from "./Reducers/rootReducer";
 import { store } from "./Store/StoreRedux";
 console.log("Redux Core");
 // Khai báo ra các state cần quản lý
